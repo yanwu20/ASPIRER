@@ -7,7 +7,7 @@ from tensorflow.python.keras.models import load_model
 
 random.seed(10)
 
-
+# load model from the model file
 def loadmodel():
     CNN_model_path = "./model/CNN_N60"
     XGB_model_path = "./model/XGB_model.pkl"
@@ -15,7 +15,7 @@ def loadmodel():
     XGB_model = joblib.load(XGB_model_path)
     return CNN_model, XGB_model
 
-
+# make the prediction based on CNN model and XGBoost model
 def prediction():
     output = dict()
     X_CNN = pd.read_csv("./features/CNN_features.csv", index_col=0)

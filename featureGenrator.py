@@ -3,6 +3,7 @@ import numpy as np
 import readFasta
 from features_code import *
 
+# this file is used to generate features file.
 filePath = "../dataset"
 
 
