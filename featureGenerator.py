@@ -27,26 +27,27 @@ def CNN_inputGenterator(fasta, length=60):
     return index, encoding
 
 
-fasta1= readFasta.readfasta("./dataset/PeNGaRoo_independent_test_N.fasta")
-fasta2= readFasta.readfasta("./dataset/PeNGaRoo_independent_test_P.fasta")
-# features = ["AAC", "CKSAAP", "Pse_pssm", "CTDC", "CTDT", "CTDD", "CTriad", "DDE", "GAAC", "GDPC", "Moran", "DPC", "TPC"]
-features = ["AAC", "CKSAAP", "CTDC", "CTDT", "CTDD", "CTriad", "DDE", "GAAC", "GDPC", "Moran", "DPC", "TPC"]
-kw = {'order': 'ACDEFGHIKLMNPQRSTVWY'}
-feature_dict = {}
-feature_list=[]
-for i in features:
-    cmd = i + '.' + i + '(fasta, **kw)'
-    encoding = eval(cmd)
-    content, index = todataframe(encoding)
-    feature_dict[i] = pd.DataFrame(content, columns=encoding[0][1:], index=index)
-    feature_list.append(pd.DataFrame(content, columns=encoding[0][1:], index=index))
+def XGB__inputGenterator(fasta):
+    # features = ["AAC", "CKSAAP", "Pse_pssm", "CTDC", "CTDT", "CTDD", "CTriad", "DDE", "GAAC", "GDPC", "Moran", "DPC", "TPC"]
+    features = ["Pse_pssm"]
+    kw = {'order': 'ACDEFGHIKLMNPQRSTVWY'}
+    feature_dict = {}
+    feature_list = []
+    for i in features:
+        cmd = i + '.' + i + '(fasta, **kw)'
+        encoding = eval(cmd)
+        content, index = todataframe(encoding)
+        feature_dict[i] = pd.DataFrame(content, columns=encoding[0][1:], index=index)
+        feature_list.append(pd.DataFrame(content, columns=encoding[0][1:], index=index))
+    df = pd.concat(feature_list, axis=1)
+    print(df)
 
-df = pd.concat(feature_list, axis=1)
-print(df)
+    return encoding
 
-fasta = fasta1+fasta2
 
+fasta_N = readFasta.readfasta("./dataset/PeNGaRoo_independent_test_N.fasta")
+fasta_P = readFasta.readfasta("./dataset/PeNGaRoo_independent_test_P.fasta")
+fasta = fasta_N + fasta_P
 CNN_index, CNN_input = CNN_inputGenterator(fasta)
 df_cnn = pd.DataFrame(CNN_input, index=CNN_index)
 df_cnn.to_csv("./features/CNN_features.csv")
-

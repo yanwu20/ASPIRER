@@ -1,4 +1,7 @@
 import sys
+from os import listdir
+from os.path import isfile, join
+
 import numpy as np
 import math
 import re
@@ -6,16 +9,38 @@ import fileinput
 
 
 def Pse_pssm(fasta, **kw):
-    pssmDir = kw['path']
-    if pssmDir is None:
+    pssmdir = kw['path']
+    if pssmdir is None:
         print('Error: please specify the directory of predicted protein disorder files by "--path" \n\n')
         return 0
-    encoding = []
 
-    return encoding
+    onlyfiles = [f for f in listdir(pssmdir) if isfile(join(pssmdir, f))]
+    fastaDict = {}
+
+    for fi in onlyfiles:
+        cntnt = ''
+        pssmContentMatrix = readToMatrix(fileinput.input(pssmdir + '/' + fi))
+        pssmContentMatrix = np.array(pssmContentMatrix)
+        sequence = pssmContentMatrix[:, 0]
+        seqLength = len(sequence)
+        for i in range(seqLength):
+            cntnt += sequence[i]
+        if cntnt in fastaDict:
+            continue
+        fastaDict[cntnt] = fi
+
+    finalist = []
+    for name, seq in fasta:
+        finalist.append(pssmdir + '/' + fastaDict[seq])
+
+    for fi in finalist:
+        input_matrix = fileinput.input(fi)
+        feature_vector = pse_pssm(input_matrix)
+
+    return feature_vector
 
 
-def pse_pssm(input_matrix, ALPHA):
+def pse_pssm(input_matrix, ALPHA=1):
     # print "start pse_pssm function"
     # ALPHA=1
     pse_pssm_matrix = handleMixed(input_matrix, ALPHA)
@@ -98,39 +123,5 @@ def readToMatrix(input_matrix):
     PSSM = np.array(PSSM)
     return PSSM
 
-
-smplist = []
-smpcnt = 0
-for line, strin in enumerate(fileinput.input(inputFile)):
-    if not check_head.match(strin):
-        smplist.append(strin.strip())
-        smpcnt += 1
-onlyfiles = [f for f in listdir(pssmdir) if isfile(join(pssmdir, f))]
-
-fastaDict = {}
-
-for fi in onlyfiles:
-    cntnt = ''
-    pssmContentMatrix = readToMatrix(fileinput.input(pssmdir + '/' + fi))
-    pssmContentMatrix = np.array(pssmContentMatrix)
-    sequence = pssmContentMatrix[:, 0]
-    seqLength = len(sequence)
-    for i in range(seqLength):
-        cntnt += sequence[i]
-    if cntnt in fastaDict:
-        # print strin
-        continue
-    fastaDict[cntnt] = fi
-
-finalist = []
-for smp in smplist:
-    # print "smp="+smp
-    # print "fastaDict[smp]="+fastaDict[smp]
-    finalist.append(pssmdir + '/' + fastaDict[smp])
-
-file_out = file(outputFile, 'w')
-
-for fi in finalist:
-    input_matrix = fileinput.input(fi)
-    feature_vector = calculateDescriptors(input_matrix, algoType, argument, veriable)
-    np.savetxt(file_out, feature_vector, delimiter=",")
+kw = {"path":"../features"}
+Pse_pssm([12,"kmmm"], **kw)
