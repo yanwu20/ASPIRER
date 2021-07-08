@@ -15,8 +15,20 @@ def todataframe(encoding):
     return new_list, index_list
 
 
-fasta = readFasta.readfasta("./dataset/PeNGaRoo_independent_test_N.fasta")
-# features = ["AAC", "CKSAAP", "pse_pssm", "CTDC", "CTDT", "CTDD", "CTriad", "DDE", "GAAC", "GDPC", "Moran", "DPC", "TPC"]
+def CNN_inputGenterator(fasta, length=60):
+    encoding = []
+    index = []
+    amino_acids = "XACDEFGHIKLMNPQRSTVWY"
+    aa2int = dict((c, i) for i, c in enumerate(amino_acids))
+    for name, seqence in fasta:
+        index.append(name)
+        encoding.append([aa2int[aa] for aa in seqence[:length]])
+    return index, encoding
+
+
+fasta1= readFasta.readfasta("./dataset/PeNGaRoo_independent_test_N.fasta")
+fasta2= readFasta.readfasta("./dataset/PeNGaRoo_independent_test_P.fasta")
+# features = ["AAC", "CKSAAP", "Pse_pssm", "CTDC", "CTDT", "CTDD", "CTriad", "DDE", "GAAC", "GDPC", "Moran", "DPC", "TPC"]
 features = ["AAC", "CKSAAP", "CTDC", "CTDT", "CTDD", "CTriad", "DDE", "GAAC", "GDPC", "Moran", "DPC", "TPC"]
 kw = {'order': 'ACDEFGHIKLMNPQRSTVWY'}
 feature_dict = {}
@@ -30,4 +42,10 @@ for i in features:
 
 df = pd.concat(feature_list, axis=1)
 print(df)
+
+fasta = fasta1+fasta2
+
+CNN_index, CNN_input = CNN_inputGenterator(fasta)
+df_cnn = pd.DataFrame(CNN_input, index=CNN_index)
+df_cnn.to_csv("./features/CNN_features.csv")
 
