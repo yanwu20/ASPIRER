@@ -4,29 +4,32 @@
 import sys, platform, os, re
 import argparse
 import numpy as np
+import pandas as pd
+
 pPath = os.path.split(os.path.realpath(__file__))[0]
 sys.path.append(pPath)
 import checkFasta
 import readFasta
 
 
-def Moran(fastas, props=['CIDH920105', 'BHAR880101', 'CHAM820101', 'CHAM820102',
-						 'CHOC760101', 'BIGC670101', 'CHAM810101', 'DAYM780201'],
-				nlag = 30, **kw):
+def Moran(fastas,nlag = 2, **kw):
 
 	if checkFasta.minSequenceLengthWithNormalAA(fastas) < nlag + 1:		
 		print('Error: all the sequence length should be larger than the nlag+1: ' + str(nlag + 1) + '\n\n')
 		return 0
 
 	AA = 'ARNDCQEGHILKMFPSTWYV'
-	fileAAidx = re.sub('codes$', '', os.path.split(os.path.realpath(__file__))[0]) + r'\AAidx.txt' if platform.system() == 'Windows' else sys.path[0] + '/AAidx.txt'
+	fileAAidx = re.sub('codes$', '', os.path.split(os.path.realpath(__file__))[0]) + r'\AAindex.txt' if platform.system() == 'Windows' else sys.path[0] + '/AAidx.txt'
 
 	with open(fileAAidx) as f:
 		records = f.readlines()[1:]
 	myDict = {}
+	props = []
 	for i in records:
 		array = i.rstrip().split('\t')
 		myDict[array[0]] = array[1:]
+		props.append(array[0])
+
 
 	AAidx = []
 	AAidxName = []
