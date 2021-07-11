@@ -17,19 +17,21 @@ def loadmodel():
     XGB_model = joblib.load(XGB_model_path)
     return CNN_model, XGB_model
 
-def valiadation(y_test,y_pred,y_score):
-    con_matrix = confusion_matrix(y_test,y_pred,labels=[0,1])
+
+def valiadation(y_test, y_pred, y_score):
+    con_matrix = confusion_matrix(y_test, y_pred, labels=[0, 1])
     tn, fp, fn, tp = con_matrix.ravel()
-    acc = (tp+tn)/(tp+fp+tn+fn)
-    precision = tp/(tp+fp)
-    recall = tp/(tp+fn)
-    specificity = tn/(tn+fp)
-    f1_score = 2*(recall*precision)/(recall+precision)
-    mcc = (tp*tn-fp*fn)/math.sqrt((tp+fp)*(tp+fn)*(tn+fp)*(tn+fn))
-    AUROC = roc_auc_score(y_test,y_score)
+    acc = (tp + tn) / (tp + fp + tn + fn)
+    precision = tp / (tp + fp)
+    recall = tp / (tp + fn)
+    specificity = tn / (tn + fp)
+    f1_score = 2 * (recall * precision) / (recall + precision)
+    mcc = (tp * tn - fp * fn) / math.sqrt((tp + fp) * (tp + fn) * (tn + fp) * (tn + fn))
+    AUROC = roc_auc_score(y_test, y_score)
     AUPRC = average_precision_score(y_test, y_score)
-    performance = [recall,specificity,precision,acc,mcc,f1_score,AUROC,AUPRC]
+    performance = [recall, specificity, precision, acc, mcc, f1_score, AUROC, AUPRC]
     return performance
+
 
 # make the prediction based on CNN model and XGBoost model
 def prediction(output_name=""):
@@ -50,7 +52,7 @@ def prediction(output_name=""):
     df_level1["mean"] = 0.5 * df_level1["CNN"] + 0.5 * df_level1["XGB"]
     df_level1["pred"] = np.rint(df_level1["mean"])
     df_level1.to_csv(output_file)
-    y_test = np.append(np.zeros(34),np.ones(34))
+    y_test = np.append(np.zeros(34), np.ones(34))
     # print(valiadation(y_test,df_level1["pred"],df_level1["mean"]))
     print(df_level1)
     return df_level1
