@@ -22,5 +22,7 @@ The dataset fold contains fasta file of the training set and testing set, while 
 
 ## Requirement 
 python 3.8
+
 xgboost 0.90
+
 scikit_learn 0.22.2 post1
