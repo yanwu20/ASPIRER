@@ -19,3 +19,8 @@ The features descriptors including Amino Acid Composition(AAC), the composition 
 predicton.py can be used for the final prediction.
 
 The dataset fold contains fasta file of the training set and testing set, while the features fold contains the generated features file.
+
+## Requirement 
+python 3.8
+xgboost 0.90
+scikit_learn 0.22.2 post1
