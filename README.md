@@ -4,9 +4,10 @@
 
 ASPIRER is a non-calssical secretion protein predictor, which combines a whole sequence-based XGBoost model and a N-terminal sequence-based convolutional neural network model. ASPIRER is anticipated to be a valuable tool for predicting novel potential non-classical proteins from sequences information and prioritising target proteins for follow-up experimental validation.
 
-![ASPIRER](https://user-images.githubusercontent.com/49023946/124868670-69d4a780-e003-11eb-9d86-a145fb88f880.png)
+
 <div align=center><img  src ="https://user-images.githubusercontent.com/49023946/124868670-69d4a780-e003-11eb-9d86-a145fb88f880.png">
 </div>
+
 ## Code detials
 
 Users can run the main.py to identify the non-classical secretion proteins. 
