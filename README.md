@@ -9,15 +9,14 @@ ASPIRER is a non-calssical secretion protein predictor, which combines a whole s
 
 ## Code detials
 
-Users can run the main.py to identify the non-classical secretion proteins. 
+* Users can run the main.py to identify the non-classical secretion proteins. 
 
-featureGenerator.py is implemented for feature generation. 
+* featureGenerator.py is implemented for feature generation. 
 
 The features descriptors including Amino Acid Composition (AAC), the Composition of K-Spaced Amino Acid Pairs (CKSAAP), Di-Peptide Composition (DPC), Tri-Peptide composition (TPC), and Dipeptide Deviation from Expected Mean (DDE),the Composition(CTDC), Transition(CTDT), Distribution(CTDD), Conjoint Triad (CTriad), Pseudo Position-Specific Score Matrix (Pse-PSSM), Grouped amino acid composition(GAAC), Grouped Di-Peptide Composition(GDPC) and Moran correlation descriptor.
 
-predicton.py can be used for the final prediction.
+* predicton.py can be used for the final prediction.
 
-The dataset fold contains fasta file of the training set and testing set, while the features fold contains the generated features file.
 
 ## Dependency
 * python 3.8
