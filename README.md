@@ -34,3 +34,5 @@ The features descriptors including Amino Acid Composition (AAC), the Composition
 You can test the 
 * python predicton.py
 
+## Reference
+* XXXXX
