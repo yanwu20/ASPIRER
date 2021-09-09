@@ -40,8 +40,8 @@ def prediction(output_name=""):
         X_CNN = pd.read_csv("./features/CNN_features_%s.csv" % output_name, index_col=0)
         output_file = "./output/%s.csv" % output_name
     else:
-        X_XGB = pd.read_csv("./features/XGB_features.csv", header=None)
-        X_CNN = pd.read_csv("./features/CNN_features.csv", index_col=0)
+        X_XGB = pd.read_csv("./features/XGB_features_test.csv", header=None)
+        X_CNN = pd.read_csv("./features/CNN_features_test.csv", index_col=0)
         output_file = "./output/ASPIERE_result.csv"
     output = dict()
     label = X_CNN.index
@@ -52,7 +52,7 @@ def prediction(output_name=""):
     df_level1["mean"] = 0.5 * df_level1["CNN"] + 0.5 * df_level1["XGB"]
     df_level1["pred"] = np.rint(df_level1["mean"])
     df_level1.to_csv(output_file)
-    y_test = np.append(np.zeros(34), np.ones(34))
+    # y_test = np.append(np.zeros(34), np.ones(34))
     # print(valiadation(y_test,df_level1["pred"],df_level1["mean"]))
     print(df_level1)
     return df_level1
