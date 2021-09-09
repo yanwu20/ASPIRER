@@ -24,15 +24,25 @@ The features descriptors including Amino Acid Composition (AAC), the Composition
 * scikit_learn 0.22.2 post1
 
 ## Dataset
-* PeNGaRoo_train_P.fasta 
-* PeNGaRoo_train_N.fasta
-* PeNGaRoo_independent_test_P.fasta
-* PeNGaRoo_independent_test_N.fasta
+* PeNGaRoo_train_P.fasta: postives samples for training 
+* PeNGaRoo_train_N.fasta: negative samples for training
+* PeNGaRoo_independent_test_P.fasta: postives samples for testing 
+* PeNGaRoo_independent_test_N.fasta: negative samples for testing
 
 
 ## Usage
-You can test the 
-* python predicton.py
+* Download ASPIRER by
+```python
+git clone https://github.com/yanwu20/ASPIRER.git
+```
+* Run the default dataset
+```
+python ASPIRER.py --type benchmark
+```
+* Run users data
+```
+python ASPIRER.py --type predict --Fasta_file [Fasta_file] --PSSM_file [PSSM_file] --output_name [output_name]
+```
 
 ## Reference
 * XXXXX
