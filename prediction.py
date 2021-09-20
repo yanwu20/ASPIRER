@@ -3,6 +3,8 @@ import random
 import joblib
 import numpy as np
 import pandas as pd
+# from keras import models
+from tensorflow.keras.models import Sequential, load_model
 from sklearn.metrics import confusion_matrix, roc_auc_score, average_precision_score
 from tensorflow.python.keras.models import load_model
 
@@ -11,8 +13,9 @@ random.seed(10)
 
 # load model from the model file
 def loadmodel():
-    CNN_model_path = "./model/CNN_N60"
+    CNN_model_path = "model/CNN_model_new"
     XGB_model_path = "./model/XGB_model.pkl"
+    # CNN_model = load_model(CNN_model_path)
     CNN_model = load_model(CNN_model_path)
     XGB_model = joblib.load(XGB_model_path)
     return CNN_model, XGB_model
@@ -52,7 +55,7 @@ def prediction(output_name=""):
     df_level1["mean"] = 0.5 * df_level1["CNN"] + 0.5 * df_level1["XGB"]
     df_level1["pred"] = np.rint(df_level1["mean"])
     df_level1.to_csv(output_file)
-    # y_test = np.append(np.zeros(34), np.ones(34))
+    y_test = np.append(np.zeros(34), np.ones(34))
     # print(valiadation(y_test,df_level1["pred"],df_level1["mean"]))
     print(df_level1)
     return df_level1
