@@ -52,9 +52,9 @@ pip install -r requirements.txt
 ```
 python ASPIRER.py --type benchmark
 ```
-* Make the prediction for customize data
+* Make the prediction for customize data and threshold
 ```
-python ASPIRER.py --type predict --Fasta_file <Fasta_file> --PSSM_file <PSSM_file> --output_name <output_name>
+python ASPIRER.py --type predict --Fasta_file <Fasta_file> --PSSM_file <PSSM_file> --output_name <output_name> --threshold <threshold>
 ```
 The Pse-PSSM file can be generated from [POSSUM webserver](https://possum.erc.monash.edu/)
 
