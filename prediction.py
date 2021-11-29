@@ -13,7 +13,7 @@ random.seed(10)
 
 # load model from the model file
 def loadmodel():
-    CNN_model_path = "model/CNN_model_new"
+    CNN_model_path = "model/CNN_model"
     XGB_model_path = "./model/XGB_model.pkl"
     # CNN_model = load_model(CNN_model_path)
     CNN_model = load_model(CNN_model_path)
@@ -37,7 +37,7 @@ def valiadation(y_test, y_pred, y_score):
 
 
 # make the prediction based on CNN model and XGBoost model
-def prediction(output_name=""):
+def prediction(output_name="", threshold=0.5):
     if output_name:
         X_XGB = pd.read_csv("./features/XGB_features_%s.csv" % output_name, header=None)
         X_CNN = pd.read_csv("./features/CNN_features_%s.csv" % output_name, index_col=0)
@@ -53,7 +53,8 @@ def prediction(output_name=""):
     output["XGB"] = XGB_model.predict_proba(X_XGB)[:, 1]
     df_level1 = pd.DataFrame(output, index=label)
     df_level1["mean"] = 0.5 * df_level1["CNN"] + 0.5 * df_level1["XGB"]
-    df_level1["pred"] = np.rint(df_level1["mean"])
+    # df_level1["pred"] = np.rint(df_level1["mean"])
+    df_level1["pred"] = (df_level1["mean"]>=threshold).astype(int)
     df_level1.to_csv(output_file)
     y_test = np.append(np.zeros(34), np.ones(34))
     # print(valiadation(y_test,df_level1["pred"],df_level1["mean"]))

@@ -15,10 +15,11 @@ if __name__ == "__main__":
     parser.add_argument('--Fasta_file', type=str, help='input fasta file')
     parser.add_argument('--PSSM_file',  type=str, help='input Pse-PSSM file')
     parser.add_argument('--output_name', type=str, help='output file name')
+    parser.add_argument('--threshold', type=float,help='prediction mode')
     args = parser.parse_args()
 
     if args.type=="benchmark":
         prediction.prediction()
     else:
         featureGenerator.generator(PSSM_file=args.PSSM_file, fasta_file=args.Fasta_file, output_name=args.output_name)
-        prediction.prediction(output_name=args.output_name)
+        prediction.prediction(output_name=args.output_name,threshold=args.threshold)
