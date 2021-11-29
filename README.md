@@ -30,8 +30,8 @@ The features descriptors including Amino Acid Composition (AAC), the Composition
 * PeNGaRoo_train_N.fasta: negative samples for training
 * PeNGaRoo_independent_test_P.fasta: postives samples for testing 
 * PeNGaRoo_independent_test_N.fasta: negative samples for testing
-* CNN_features_test.csv and XGB_features_test.csv: generated feature files for test dataset
-* pse_pssm_train.csv and pse_pssm_test.csv: Pse-PSSM file for training set and testing set
+* CNN_features_test.csv and XGB_features_test.csv: generated feature files of test dataset
+* pse_pssm_train.csv and pse_pssm_test.csv: Pse-PSSM file of training set and testing set
 
 **The customized file should be consistant with the example files
 
