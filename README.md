@@ -1,4 +1,4 @@
-# ASPIERE: Non-classical secretion protein predictor based on deep learning
+# ASPIRER: Non-classical secretion protein predictor based on deep learning
 
 ## Introduction
 
