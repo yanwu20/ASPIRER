@@ -66,4 +66,4 @@ The Pse-PSSM file can be generated from [POSSUM webserver](https://possum.erc.mo
 |sequence name|score of CNN model|score of XGB model|final score|predict class|
 
 ## Reference
-* XXXXX
+* Wang, X. et al., ASPIRER: a new computational approach for identifying non-classical secreted proteins based on deep learning, submitted for publication
