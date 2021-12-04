@@ -2,9 +2,10 @@
 
 ## Introduction
 
-Protein secretion has a pivotal role in maintaining life activities and communication, from the cytoplasm to the host or external environment. Gram-positive bacteria can secrete proteins through multiple secretion pathways. The non-classical secretion pathway has recently received an increasing attention among these secretion pathways, but its mechanism is still unclear.Here we propose a new hybrid deep learning framework, termed ASPIRER, for NCSP identification from amino acid sequences. ASPIRER combines a whole sequence-based XGBoost model and a N-terminal sequence-based convolutional neural network model.
+Protein secretion has a pivotal role in maintaining life activities and communication, from the cytoplasm to the host or external environment. Gram-positive bacteria can secrete proteins through multiple secretion pathways. The non-classical secretion pathway has recently received an increasing attention among these secretion pathways, but its mechanism is still unclear.Here, we propose a new hybrid deep learning framework, termed ASPIRER, for non-classical secreted protein (NCSP) identification from amino acid sequences. ASPIRER combines a whole sequence-based XGBoost model and a N-terminal sequence-based convolutional neural network model.
 
-<div align=center><img  src ="https://user-images.githubusercontent.com/49023946/124868670-69d4a780-e003-11eb-9d86-a145fb88f880.png" alt="Framework of ASPIRER"></div>
+<div align=center><img  src ="https://user-images.githubusercontent.com/49023946/144698328-5afae075-537b-4747-9b6d-53c434478adf.png" alt="Framework of ASPIRER"></div>
+
 
 ASPIRER is anticipated to be a valuable tool for predicting novel potential non-classical proteins from sequences information and prioritising target proteins for follow-up experimental validation.
 
